@@ -4,6 +4,8 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
+
 
 public class Polynomial{
 	double [] coeff;
@@ -31,7 +33,7 @@ public class Polynomial{
 	public Polynomial(File f) throws IOException{
 		BufferedReader reader= new BufferedReader(new FileReader(f));
 		String line = reader.readLine();
-		String[] terms=line.split("[\\+\\-]");
+		String[] terms=line.split("(?=[+-])");
 		double [] coeff=new double[terms.length];
 		int [] expo=new int[terms.length];
 		for (int i=0; i<terms.length; i++){
@@ -40,7 +42,7 @@ public class Polynomial{
 				expo[i]=0;
 				continue;
 			}else{
-				String [] nums=terms[i].split("x");
+				String [] nums=terms[i].split("x", -1);
 				if (nums[0].equals("")){coeff[i]=1;}else{
 					coeff[i]=Double.parseDouble(nums[0]);
 				}
@@ -129,6 +131,11 @@ public class Polynomial{
 		if (expo[coeff.length-1]!=0){writer.print("x");}
 		if (expo[coeff.length-1]!=1){writer.print(expo[coeff.length-1]);}
 		writer.close();
+	}
+
+	public void print(){
+		System.out.println(Arrays.toString(coeff)+Arrays.toString(expo));
+
 	}
 
 }

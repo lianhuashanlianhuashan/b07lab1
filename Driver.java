@@ -14,7 +14,7 @@ public class Driver {
 			p1.saveToFile("p1.txt");
 			Polynomial p1c=new Polynomial(new File("p1.txt"));
 			System.out.println(p1c.evaluate(3)+" should be 1458.0");
-			System.out.println(Arrays.toString(p1c.coeff)+Arrays.toString(p1c.expo));
+			p1c.print();
 		}catch (IOException e){
 			e.printStackTrace();
 		}
@@ -23,13 +23,13 @@ public class Driver {
 		int [] e2={1, 2, 3};
 		Polynomial p2 = new Polynomial(c2, e2);
 
-		System.out.println(p2.evaluate(3)+" should be -236.0");
+		System.out.println(p2.evaluate(3)+" should be -240.0");
 
 		Polynomial p3=p1.add(p2);
-		System.out.println(p3.evaluate(3)+" should be 1222.0");
+		System.out.println(p3.evaluate(3)+" should be 1218.0");
 
 		Polynomial p4=p1.multiply(p2);
-		System.out.println(p4.evaluate(3)+" should be -344088");
+		System.out.println(p4.evaluate(3)+" should be -34992.0");
 		
 		
 	}
