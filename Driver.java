@@ -1,16 +1,36 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+
 public class Driver {
 	public static void main(String [] args) {
 		Polynomial p = new Polynomial();
-		System.out.println(p.evaluate(3));
-		double [] c1 = {6,0,0,5};
-		Polynomial p1 = new Polynomial(c1);
-		double [] c2 = {0,-2,0,0,-9};
-		Polynomial p2 = new Polynomial(c2);
-		Polynomial s = p1.add(p2);
-		System.out.println("s(0.1) = " + s.evaluate(0.1));
-		if(s.hasRoot(1))
-			System.out.println("1 is a root of s");
-		else
-			System.out.println("1 is not a root of s");
+		System.out.println(p.evaluate(3)+" should be 0.0");
+		double [] c1 = {6,-2, 3, 5};
+		int [] e1={0, 1, 4, 5};
+		Polynomial p1 = new Polynomial(c1, e1);
+		System.out.println(p1.evaluate(3)+" should be 1458.0");
+		try{
+			p1.saveToFile("p1.txt");
+			Polynomial p1c=new Polynomial(new File("p1.txt"));
+			System.out.println(p1c.evaluate(3)+" should be 1458.0");
+			System.out.println(Arrays.toString(p1c.coeff)+Arrays.toString(p1c.expo));
+		}catch (IOException e){
+			e.printStackTrace();
+		}
+
+		double [] c2 = {-2,1, -9};
+		int [] e2={1, 2, 3};
+		Polynomial p2 = new Polynomial(c2, e2);
+
+		System.out.println(p2.evaluate(3)+" should be -236.0");
+
+		Polynomial p3=p1.add(p2);
+		System.out.println(p3.evaluate(3)+" should be 1222.0");
+
+		Polynomial p4=p1.multiply(p2);
+		System.out.println(p4.evaluate(3)+" should be -344088");
+		
+		
 	}
 }
